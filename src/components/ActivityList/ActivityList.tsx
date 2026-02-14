@@ -1,5 +1,5 @@
 import { Table } from 'antd'; 
-import type { EntrieType, ActivityListType, ActivityListTableType } from '../../types';
+import type { ActivityListType, ActivityListTableType } from '../../types';
 import type { TableProps } from 'antd';
 
 const ActivityList: React.FC<ActivityListType> = ({ entries }) => {

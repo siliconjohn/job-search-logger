@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Input, List, Button, Form } from 'antd';
-import type { LogType } from './types';
-import type { EntrieType, ActivityListType } from './types';
-import ActivityList from './components/ActivityList/ActivityList';
+import { Input, Button, Form } from 'antd';
+import type { LogType } from '../../types';
+import type { EntrieType } from '../../types';
+import ActivityList from '../ActivityList/ActivityList';
 
 const ActivityLog: React.FC<LogType> = ( { name } ) => {
     const [ formController ] = Form.useForm();
@@ -10,10 +10,10 @@ const ActivityLog: React.FC<LogType> = ( { name } ) => {
     	const saved = localStorage.getItem('entries');  
 			if (saved) {
 				try {
-						return( JSON.parse(saved) );
+					return( JSON.parse(saved) );
 				} catch (e) {
-						console.error('Failed to parse entries from localStorage', e);
-						
+					console.error('Failed to parse entries from localStorage', e);
+		
 				}
 			}
 			return [];
@@ -73,7 +73,7 @@ const ActivityLog: React.FC<LogType> = ( { name } ) => {
             </Form>
 
 
-						<ActivityList entries={ entries }/>
+			<ActivityList entries={ entries }/>
         </>
     )
 }  

@@ -1,5 +1,5 @@
 import { Flex, Layout } from 'antd';
-import ActivityLog from '../../ActivityLog.tsx'
+import ActivityLog from '../ActivityLog/ActivityLog.tsx'
 const { Header, Content } = Layout;
 import './App.css'
 
