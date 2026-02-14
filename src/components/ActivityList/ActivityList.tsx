@@ -1,8 +1,10 @@
 import { Table } from 'antd'; 
-import type { ActivityListType, ActivityListTableType } from '../../types';
+import type { ActivityListTableType } from '../../types';
 import type { TableProps } from 'antd';
+import { useEntriesStore } from '../../stores/entriesStore';
 
-const ActivityList: React.FC<ActivityListType> = ({ entries }) => {
+const ActivityList: React.FC = () => {
+    const entries = useEntriesStore( ( state ) => state.entries );
 
     const columns: TableProps<ActivityListTableType>['columns'] = [
         {
@@ -36,7 +38,10 @@ const ActivityList: React.FC<ActivityListType> = ({ entries }) => {
     ];
 
     return (
-        <Table<ActivityListTableType> columns={columns} dataSource={entries} /> 
+        <Table<ActivityListTableType> 
+            columns={columns} 
+            dataSource={entries} 
+        /> 
     )
 }  
 

@@ -1,20 +1,19 @@
 import { Input, Button, Form } from 'antd'; 
 import type { EntrieType } from '../../types'; 
+import { useEntriesStore } from '../../stores/entriesStore';
 
 const AddEntry: React.FC = () => {
     const [ formController ] = Form.useForm();
-    
-    const onFinish = ( values: EntrieType ) => {
-        const savedEntries = JSON.parse( localStorage.getItem('entries') ?? '' ); 
-
-        const merged = [ ...savedEntries, 
-            { 
+    const { addEntry } = useEntriesStore();
+ 
+    const onFinish = ( values: EntrieType ) => {    
+        addEntry( { 
                 ...values, 
                 createdAt: new Date(), 
                 key: Math.random().toString().slice(2, 12)
             } 
-        ]
-        localStorage.setItem('entries', JSON.stringify(merged));
+        );
+        
         formController.resetFields();
     };
     

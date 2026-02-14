@@ -50,7 +50,7 @@ const App: React.FC = () => (
         <Layout style={layoutStyle}>
           <Header style={headerStyle}>Job Seek Log</Header>
           <Content style={contentStyle}> 
-          <ActivityLog name="Job Seek Log"/>
+          <ActivityLog name="Activity Log"/>
         </Content> 
       </Layout>
     </Flex>
