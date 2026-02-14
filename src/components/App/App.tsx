@@ -19,7 +19,7 @@ const contentStyle: React.CSSProperties = {
   padding: '50px',
   overflow: 'scroll',
   backgroundColor: '#00542317',
-};
+};  
   
 const layoutStyle = {
   borderRadius: 8,

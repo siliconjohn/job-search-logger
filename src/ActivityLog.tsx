@@ -1,22 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Input, List, Button, Form } from 'antd';
 import type { LogType } from './types';
-import type { EntrieType } from './types';
+import type { EntrieType, ActivityListType } from './types';
+import ActivityList from './components/ActivityList/ActivityList';
 
 const ActivityLog: React.FC<LogType> = ( { name } ) => {
     const [ formController ] = Form.useForm();
     const [ entries, setEntries ] = useState<EntrieType[]>( () => {
-    const saved = localStorage.getItem('entries');
-        
-        if (saved) {
-            try {
-                return( JSON.parse(saved) );
-            } catch (e) {
-                console.error('Failed to parse entries from localStorage', e);
-               
-            }
-        }
-        return [];
+    	const saved = localStorage.getItem('entries');  
+			if (saved) {
+				try {
+						return( JSON.parse(saved) );
+				} catch (e) {
+						console.error('Failed to parse entries from localStorage', e);
+						
+				}
+			}
+			return [];
     } );  
  
     const onFinish = ( values: EntrieType ) => {
@@ -65,25 +65,8 @@ const ActivityLog: React.FC<LogType> = ( { name } ) => {
                 </Form.Item>
             </Form>
 
-            { entries.length > 0 &&
-                <List
-                    dataSource={ entries }
-                    itemLayout="horizontal"
-                    renderItem={ (item) => (
-                        <List.Item>
-                            <List.Item.Meta
-                                title={ item.name }
-                                description={
-                                    <>
-                                        <a href={ item.url}>{ item.url }</a>
-                                        <p>{ item.createdAt.toLocaleString() }</p>
-                                    </>
-                                }
-                            />
-                        </List.Item>
-                    )}
-                />
-            }
+
+						<ActivityList entries={ entries }/>
         </>
     )
 }  
