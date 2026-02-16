@@ -3,7 +3,7 @@ import type { EntrieType } from '../../types';
 import { useEntriesStore } from '../../stores/entriesStore';
 
 const AddEntry: React.FC = () => {
-    const [ formController ] = Form.useForm();
+    const [ form ] = Form.useForm();
     const { addEntry } = useEntriesStore();
  
     const onFinish = ( values: EntrieType ) => {    
@@ -14,13 +14,13 @@ const AddEntry: React.FC = () => {
             } 
         );
         
-        formController.resetFields();
+        form.resetFields();
     };
     
     return (
         <>
             <Form
-                form={ formController }
+                form={ form }
                 onFinish={ onFinish }
                 labelCol={{ span: 2 }}
                 wrapperCol={{ span: 12 }}

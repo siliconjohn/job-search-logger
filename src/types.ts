@@ -1,8 +1,4 @@
 
-export type LogType = { 
-    name: string
-}
-
 export type EntrieType = {
     name: string,
     url: string,
@@ -10,11 +6,11 @@ export type EntrieType = {
     key: string
 }
 
-export type ActivityListType = {
+export type EntryListType = {
     entries: EntrieType[];
 }
 
-export interface ActivityListTableType {
+export interface EntryListTableType {
     key: string,
     name: string,
     url: string,

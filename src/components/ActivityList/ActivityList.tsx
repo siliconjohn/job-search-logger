@@ -1,12 +1,12 @@
 import { Table } from 'antd'; 
-import type { ActivityListTableType } from '../../types';
+import type { EntryListTableType } from '../../types';
 import type { TableProps } from 'antd';
 import { useEntriesStore } from '../../stores/entriesStore';
 
 const ActivityList: React.FC = () => {
     const entries = useEntriesStore( ( state ) => state.entries );
 
-    const columns: TableProps<ActivityListTableType>['columns'] = [
+    const columns: TableProps<EntryListTableType>['columns'] = [
         {
             title: 'Date',
             dataIndex: 'date',
@@ -38,7 +38,7 @@ const ActivityList: React.FC = () => {
     ];
 
     return (
-        <Table<ActivityListTableType> 
+        <Table<EntryListTableType> 
             columns={columns} 
             dataSource={entries} 
         /> 
