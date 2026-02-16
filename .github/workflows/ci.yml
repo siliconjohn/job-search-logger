@@ -26,9 +26,9 @@ jobs:
         working-directory: ./          # ← change if your folder is called frontend, app, etc.
         run: npm ci                          # faster & more reliable than npm install
 
-      # - name: Lint frontend
-      #   working-directory: ./client
-      #   run: npm run lint                    # only if you have a lint script
+      - name: Lint frontend
+        working-directory: ./
+        run: npm run lint                    # only if you have a lint script
 
       - name: Build frontend
         working-directory: ./
