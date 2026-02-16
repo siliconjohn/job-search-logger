@@ -3,9 +3,9 @@ import type { EntrieType } from '../../types';
 import type { FormInstance } from 'antd';
 
 interface InputCopyPasteProps {
-  form: FormInstance;
-  label: string;
-  valueName: keyof EntrieType;
+    form: FormInstance;
+    label: string;
+    valueName: keyof EntrieType;
 }
 
 const InputCopyPaste = ( { form, label, valueName } : InputCopyPasteProps ) => {   

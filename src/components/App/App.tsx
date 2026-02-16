@@ -33,7 +33,7 @@ const App: React.FC = () => (
             <Layout style={layoutStyle}>
                 <Header>Job Seek Log</Header>
                 <Content style={contentStyle}>
-                    <ActivityLog name="Activity Log" />
+                    <ActivityLog/>
                 </Content>
             </Layout>
         </Flex>
