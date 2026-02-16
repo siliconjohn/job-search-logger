@@ -29,14 +29,32 @@ const AddEntry: React.FC = () => {
             >   
                 <InputCopyPaste 
                     form={ form }
-                    label="Name"
-                    valueName={ "name" }
+                    label="Company"
+                    valueName={ "company" }
+                />
+                
+                <InputCopyPaste 
+                    form={ form }
+                    label="Position"
+                    valueName={ "position" }
                 />
 
                 <InputCopyPaste 
                     form={ form }
                     label="URL"
                     valueName={ "url" }
+                />
+                
+                <InputCopyPaste 
+                    form={ form }
+                    label="Name"
+                    valueName={ "name" }
+                />
+
+                <InputCopyPaste 
+                    form={ form }
+                    label="Note"
+                    valueName={ "note" }
                 />
                 
                 <Button 
