@@ -31,7 +31,7 @@ jobs:
       #   run: npm run lint                    # only if you have a lint script
 
       - name: Build frontend
-        working-directory: ./client
+        working-directory: ./
         run: npm run build
 
       # - name: Test frontend (optional)
