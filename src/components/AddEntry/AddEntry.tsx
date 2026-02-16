@@ -57,12 +57,14 @@ const AddEntry: React.FC = () => {
                     valueName={ "note" }
                 />
                 
-                <Button 
-                    type="primary" 
-                    htmlType="submit"
-                >
-                    Submit
-                </Button>
+                 <Form.Item label={null}>
+                    <Button 
+                        type="primary" 
+                        htmlType="submit"
+                    >
+                        Save
+                    </Button>
+                 </Form.Item>
             </Form> 
         </>
     )
