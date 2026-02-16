@@ -1,4 +1,8 @@
 
+export type EntryKind = {
+    kind: 'App' | 'Note' | 'Contact' | 'Other'
+}
+
 export type EntrieType = {
     name: string,
     url: string,
@@ -6,6 +10,7 @@ export type EntrieType = {
     note: string,
     position: string,
     createdAt: Date,
+    kind: EntryKind
     key: string
 }
 

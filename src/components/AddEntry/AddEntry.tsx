@@ -2,12 +2,15 @@ import { Button, Form } from 'antd';
 import type { EntrieType } from '../../types'; 
 import { useEntriesStore } from '../../stores/entriesStore';
 import InputCopyPaste from '../InputCopyPaste/InputCopyPaste';
+import EntryKindExample from '../KindChooser/KindChooser';
 
 const AddEntry: React.FC = () => {
     const [ form ] = Form.useForm();
     const { addEntry } = useEntriesStore();
  
     const onFinish = ( values: EntrieType ) => {    
+        console.log( values )
+
         addEntry( { 
                 ...values, 
                 createdAt: new Date(), 
@@ -25,7 +28,7 @@ const AddEntry: React.FC = () => {
                 onFinish={ onFinish }
                 labelCol={{ span: 2 }}
                 wrapperCol={{ span: 12 }}
-                initialValues={{ name: '', url: '' }}
+                initialValues={{ name: '', url: '', kind: '' }}
             >   
                 <InputCopyPaste 
                     form={ form }
@@ -57,7 +60,14 @@ const AddEntry: React.FC = () => {
                     valueName={ "note" }
                 />
                 
-                 <Form.Item label={null}>
+                <EntryKindExample 
+                    form={ form }
+                    label="Note"
+                    valueName={ "note" }
+                />
+                
+
+                <Form.Item label={null}>
                     <Button 
                         type="primary" 
                         htmlType="submit"
