@@ -45,12 +45,6 @@ const AddEntry: React.FC = () => {
                     label="URL"
                     valueName={ "url" }
                 />
-                
-                <InputCopyPaste 
-                    form={ form }
-                    label="Name"
-                    valueName={ "name" }
-                />
 
                 <InputCopyPaste 
                     form={ form }
