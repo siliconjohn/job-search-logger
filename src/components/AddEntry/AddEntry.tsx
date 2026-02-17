@@ -9,12 +9,10 @@ const AddEntry: React.FC = () => {
     const { addEntry } = useEntriesStore();
  
     const onFinish = ( values: EntrieType ) => {    
-        console.log( values )
-
         addEntry( { 
                 ...values, 
-                createdAt: new Date(), 
-                key: Math.random().toString().slice(2, 12)
+                createdAt: new Date().toISOString(), 
+                key: crypto.randomUUID()
             } 
         );
         
@@ -28,7 +26,7 @@ const AddEntry: React.FC = () => {
                 onFinish={ onFinish }
                 labelCol={{ span: 2 }}
                 wrapperCol={{ span: 12 }}
-                initialValues={{ name: '', url: '', kind: '' }}
+                initialValues={{ name: '', url: '', kind: 'App' }}
             >   
                 <InputCopyPaste 
                     form={ form }
@@ -60,13 +58,10 @@ const AddEntry: React.FC = () => {
                     valueName={ "note" }
                 />
                 
-                <EntryKindExample 
-                    form={ form }
-                    label="Note"
-                    valueName={ "note" }
+                <EntryKindExample  
+                    valueName={ "kind" }
                 />
                 
-
                 <Form.Item label={null}>
                     <Button 
                         type="primary" 
