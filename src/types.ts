@@ -3,8 +3,7 @@ export type EntryKind = {
     kind: 'App' | 'Note' | 'Contact' | 'Other'
 }
 
-export type EntrieType = {
-    name: string,
+export type EntrieType = { 
     url: string,
     company: string,
     note: string,
@@ -19,8 +18,11 @@ export type EntryListType = {
 }
 
 export interface EntryListTableType {
-    key: string,
-    name: string,
+    key: string,  
     url: string,
-    createdAt: string 
+    company: string,
+    note: string,
+    position: string,
+    createdAt: string,
+    kind: EntryKind
 }
