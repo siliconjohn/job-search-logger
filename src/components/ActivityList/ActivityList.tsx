@@ -1,5 +1,5 @@
-import { Table } from 'antd'; 
-import type { EntryListTableType } from '../../types';
+import { Table, Tag } from 'antd'; 
+import type { EntryListTableType, EntryKind } from '../../types';
 import type { TableProps } from 'antd';
 import { useEntriesStore } from '../../stores/entriesStore';
 
@@ -15,8 +15,52 @@ const hrefStyle: React.CSSProperties = {
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap' 
 }
-              
+ 
+const kindToColor: Record<EntryKind['kind'], string> = {
+    App: 'green',
+    Note: 'blue',
+    Contact: 'gray',
+    Other: 'red',
+}; 
+
+const getTagColor = (kind: EntryKind['kind']): string => {
+  return kindToColor[kind] ?? 'default';  
+};
+
 const columns: TableProps<EntryListTableType>['columns'] = [
+    {
+        title: 'Kind',
+        dataIndex: 'kind',
+        key: 'kind',
+        width: 100,
+        render: (kind: EntryKind['kind']) => (  
+            <Tag color={ getTagColor(kind) } variant="solid">{kind}</Tag>
+        ),
+    },
+    {
+        title: 'Company',
+        dataIndex: 'company',
+        key: 'company',  
+    },
+    {
+        title: 'Position',
+        dataIndex: 'position',
+        key: 'position',  
+    },
+     
+    {
+        title: 'URL',
+        dataIndex: 'url',
+        key: 'url',
+        render: (url) => 
+            <a style={ hrefStyle } 
+                href={url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+            >
+                {url}
+            </a> 
+    },
     {
         title: 'Created',
         dataIndex: 'createdAt',
@@ -30,24 +74,6 @@ const columns: TableProps<EntryListTableType>['columns'] = [
         },
         defaultSortOrder: 'descend',    
         sortDirections: ['ascend', 'descend'],
-    },
-    {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',  
-    },
-    {
-        title: 'URL',
-        dataIndex: 'url',
-        key: 'url',
-        render: (url) => 
-            <a style={ hrefStyle } 
-                href={url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-            >
-                {url}
-            </a> 
     }
 ];
 
