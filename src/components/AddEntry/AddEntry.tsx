@@ -1,16 +1,47 @@
 import { Button, Card, Form } from 'antd'; 
-import type { EntrieType } from '../../types'; 
+import type { EntrieType, EntryKind } from '../../types'; 
 import { useEntriesStore } from '../../stores/entriesStore';
 import InputCopyPaste from '../InputCopyPaste/InputCopyPaste';
 import EntryKindExample from '../KindChooser/KindChooser';
+
+const sanitizeText = (value: string): string =>
+    value.replace(/<[^>]*>/g, '').trim();
+
+const sanitizeUrl = (value: string): string => {
+    const trimmed = value.trim();
+    try {
+        const parsed = new URL(trimmed);
+        if (!['http:', 'https:'].includes(parsed.protocol)) return '';
+        return parsed.toString();
+    } catch {
+        return '';
+    }
+};
+
+const VALID_KINDS: EntryKind['kind'][] = ['Application', 'Note', 'Contact', 'Other'];
+
+const sanitizeKind = (value: EntryKind): EntryKind => ({
+    kind: VALID_KINDS.includes(value?.kind) ? value.kind : 'Other'
+});
+
+const sanitizeValues = (values: EntrieType): EntrieType => ({
+    ...values,
+    company: sanitizeText(values.company ?? ''),
+    position: sanitizeText(values.position ?? ''),
+    url: sanitizeUrl(values.url ?? ''),
+    note: sanitizeText(values.note ?? ''),
+    kind: sanitizeKind(values.kind),
+});
 
 const AddEntry: React.FC = () => {
     const [ form ] = Form.useForm();
     const { addEntry } = useEntriesStore();
  
-    const onFinish = ( values: EntrieType ) => {    
+    const onFinish = ( values: EntrieType ) => {
+        const sanitized = sanitizeValues(values);
+
         addEntry( { 
-                ...values, 
+                ...sanitized, 
                 createdAt: new Date().toISOString(), 
                 key: crypto.randomUUID()
             } 
@@ -20,13 +51,13 @@ const AddEntry: React.FC = () => {
     };
  
     return (
-        <Card title="Add To Log"  style={{ marginBottom: 24 }}>
+        <Card title="Add Entry" style={{ marginBottom: 24 }}>
             <Form
                 form={ form }
                 onFinish={ onFinish }
                 labelCol={{ span: 2 }}
                 wrapperCol={{ span: 12 }}
-                initialValues={{ name: '', url: '', kind: 'Application' }}
+                initialValues={{ name: '', url: '', kind: { kind: 'Application' } }}
                 >   
                 <InputCopyPaste 
                     form={ form }

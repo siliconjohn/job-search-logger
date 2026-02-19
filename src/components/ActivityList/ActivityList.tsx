@@ -49,8 +49,8 @@ const columns: TableProps<EntryListTableType>['columns'] = [
         dataIndex: 'kind',
         key: 'kind',
         width: 50,
-        render: (kind: EntryKind['kind']) => (  
-            <Tag color={ getTagColor(kind) } variant="solid">{kind}</Tag>
+        render: (kind: EntryKind) => (  
+            <Tag color={ getTagColor(kind.kind) } variant="solid">{ kind.kind }</Tag>
         ),
     },
     {
