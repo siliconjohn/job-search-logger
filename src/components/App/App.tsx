@@ -3,8 +3,7 @@ import { Flex, Layout, Button, ConfigProvider, theme } from 'antd';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import ThemeProvider from '../../contexts/ThemeProvider';
 import ActivityLog from '../ActivityLog/ActivityLog';
-const { Header, Content } = Layout;
-import './App.css';
+const { Header, Content } = Layout; 
 
 const AppLayout = () => {
     const { themeName, toggleTheme } = useContext(ThemeContext)!;
