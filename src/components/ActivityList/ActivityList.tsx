@@ -15,17 +15,18 @@ const hrefStyle: React.CSSProperties = {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap' 
-}
- 
-const kindToColor: Record<EntryKind['kind'], string> = {
-    Application: 'green',
-    Note: 'blue',
-    Contact: 'gray',
-    Other: 'red',
-}; 
+} 
 
-const getTagColor = (kind: EntryKind['kind']): string => {
-  return kindToColor[kind] ?? 'default';  
+const kindToColor: Record<EntryKind, string> = {
+  Application: 'green',
+  Note: 'blue',
+  Contact: 'gray',
+  Other: 'red',
+};
+
+// Updated function – now takes the string directly
+const getTagColor = (kind: EntryKind): string => {
+  return kindToColor[kind] ?? 'default';
 };
 
 const columns: TableProps<EntryListTableType>['columns'] = [
@@ -49,8 +50,10 @@ const columns: TableProps<EntryListTableType>['columns'] = [
         dataIndex: 'kind',
         key: 'kind',
         width: 50,
-        render: (kind: EntryKind) => (  
-            <Tag color={ getTagColor(kind.kind) } variant="solid">{ kind.kind }</Tag>
+        render: (kind: EntryKind) => (
+            <Tag color={getTagColor(kind)} variant="solid">
+                {kind}
+            </Tag>
         ),
     },
     {

@@ -1,7 +1,4 @@
-
-export type EntryKind = {
-    kind: 'Application' | 'Note' | 'Contact' | 'Other'
-}
+export type EntryKind =  'Application' | 'Note' | 'Contact' | 'Other';
 
 export type EntrieType = { 
     url: string,

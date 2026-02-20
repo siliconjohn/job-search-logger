@@ -18,11 +18,11 @@ const sanitizeUrl = (value: string): string => {
     }
 };
 
-const VALID_KINDS: EntryKind['kind'][] = ['Application', 'Note', 'Contact', 'Other'];
+const VALID_KINDS: EntryKind[]  = [ 'Application', 'Note', 'Contact', 'Other'];
 
-const sanitizeKind = (value: EntryKind): EntryKind => ({
-    kind: VALID_KINDS.includes(value?.kind) ? value.kind : 'Other'
-});
+const sanitizeKind = (value: EntryKind): EntryKind =>
+  VALID_KINDS.includes(value) ? value : 'Other';
+
 
 const sanitizeValues = (values: EntrieType): EntrieType => ({
     ...values,
@@ -57,7 +57,7 @@ const AddEntry: React.FC = () => {
                 onFinish={ onFinish }
                 labelCol={{ span: 2 }}
                 wrapperCol={{ span: 12 }}
-                initialValues={{ name: '', url: '', kind: { kind: 'Application' } }}
+                initialValues={{ name: '', url: '', kind: 'Application' }}
                 >   
                 <InputCopyPaste 
                     form={ form }
