@@ -12,7 +12,7 @@ export const getEntryKindColor = (kind: EntryKind): string => {
 };
 
 // change name
-export type EntrieType = { 
+export type EntryType = { 
     url: string,
     company: string,
     note: string,
@@ -23,7 +23,7 @@ export type EntrieType = {
 }
 
 export type EntryListType = {
-    entries: EntrieType[];
+    entries: EntryType[];
 }
 
 export interface EntryListTableType {
