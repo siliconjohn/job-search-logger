@@ -2,11 +2,7 @@ import { useState, useMemo } from 'react';
 import { type TableProps, Table, Input, Tag, Card } from 'antd'; 
 import { useEntriesStore } from '../../stores/entriesStore';
 import { type Entry, type EntryKind, getEntryKindColor } from '../../types/entryTypes';
-
-const dateFormatter = new Intl.DateTimeFormat('en-US', {
-    month: 'short',
-    day: 'numeric',
-});
+import { formatDateShort } from '../../utils/dates';
 
 const columns: TableProps<Entry>['columns'] = [
     {
@@ -15,7 +11,7 @@ const columns: TableProps<Entry>['columns'] = [
         key: 'createdAt',
         width: 70,
         render: (createdAt) => 
-            dateFormatter.format( new Date( createdAt )),
+            formatDateShort.format( new Date( createdAt )),
         sorter: (a, b) => { 
             const timeA = new Date(a.createdAt).getTime();
             const timeB = new Date(b.createdAt).getTime();

@@ -3,6 +3,7 @@ import { type Entry, sanitizeKind } from '../../types/entryTypes';
 import { useEntriesStore } from '../../stores/entriesStore';
 import InputCopyPaste from '../InputCopyPaste/InputCopyPaste';
 import EntryKindExample from '../KindChooser/KindChooser';
+import { sanitizeText, sanitizeUrl} from '../../utils/sanitizers';
 
 const initialValues={
   company: '',
@@ -11,20 +12,6 @@ const initialValues={
   note: '',
   kind: 'Application',   
 }
-
-const sanitizeText = (value: string): string =>
-    value.replace(/<[^>]*>/g, '').trim();
-
-const sanitizeUrl = (value: string): string => {
-    const trimmed = value.trim();
-    try {
-        const parsed = new URL(trimmed);
-        if (!['http:', 'https:'].includes(parsed.protocol)) return '';
-        return parsed.toString();
-    } catch {
-        return '';
-    }
-};
 
 const sanitizeValues = (values: Entry): Entry => ({
     ...values,
