@@ -1,8 +1,7 @@
-import { Table, Input, Tag, Card } from 'antd'; 
-import { useState } from 'react';
-import { type Entry, type EntryKind, getEntryKindColor } from '../../types/entryTypes';
-import type { TableProps } from 'antd';
+import { useState, useMemo } from 'react';
+import { type TableProps, Table, Input, Tag, Card } from 'antd'; 
 import { useEntriesStore } from '../../stores/entriesStore';
+import { type Entry, type EntryKind, getEntryKindColor } from '../../types/entryTypes';
 
 const dateFormatter = new Intl.DateTimeFormat('en-US', {
     month: 'short',
@@ -72,16 +71,19 @@ const ActivityList: React.FC = () => {
     const entries = useEntriesStore( ( state ) => state.entries );
     const [searchText, setSearchText] = useState('');
  
-    const filteredEntries = entries.filter((entry) => {
-        if (!searchText) return true;
+    const filteredEntries = useMemo(() => {
+        if (!searchText) return entries;
+
         const lowerSearch = searchText.toLowerCase();
 
-        return (
-            (entry.company?.toLowerCase().includes(lowerSearch) ?? false) ||
-            (entry.position?.toLowerCase().includes(lowerSearch) ?? false) ||
-            (entry.url?.toLowerCase().includes(lowerSearch) ?? false)
-        );
-    });
+        return entries.filter(entry => {
+            return (
+                (entry.company?.toLowerCase().includes(lowerSearch) ?? false) ||
+                (entry.position?.toLowerCase().includes(lowerSearch) ?? false) ||
+                (entry.url?.toLowerCase().includes(lowerSearch) ?? false)
+            );
+        });
+    }, [ entries, searchText ]);
     
     return (
         <Card title="Log">
@@ -97,6 +99,7 @@ const ActivityList: React.FC = () => {
                 columns={columns} 
                 dataSource={filteredEntries} 
                 rowKey="key" 
+                scroll={{ x: 'max-content' }}
             /> 
         </Card>
     )
