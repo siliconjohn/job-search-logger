@@ -1,6 +1,6 @@
 import { Table, Input, Tag, Card } from 'antd'; 
 import { useState } from 'react';
-import type { EntryListTableType, EntryKind } from '../../types';
+import { type EntryListTableType, type EntryKind, getEntryKindColor } from '../../types';
 import type { TableProps } from 'antd';
 import { useEntriesStore } from '../../stores/entriesStore';
 
@@ -17,17 +17,6 @@ const hrefStyle: React.CSSProperties = {
     whiteSpace: 'nowrap' 
 } 
 
-const kindToColor: Record<EntryKind, string> = {
-  Application: 'green',
-  Note: 'blue',
-  Contact: 'gray',
-  Other: 'red',
-};
-
-// Updated function – now takes the string directly
-const getTagColor = (kind: EntryKind): string => {
-  return kindToColor[kind] ?? 'default';
-};
 
 const columns: TableProps<EntryListTableType>['columns'] = [
     {
@@ -51,7 +40,7 @@ const columns: TableProps<EntryListTableType>['columns'] = [
         key: 'kind',
         width: 50,
         render: (kind: EntryKind) => (
-            <Tag color={getTagColor(kind)} variant="solid">
+            <Tag color={getEntryKindColor(kind)} variant="solid">
                 {kind}
             </Tag>
         ),
